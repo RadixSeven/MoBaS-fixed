@@ -53,7 +53,7 @@ public final class ComponentFinder {
      
         AllNode= false;
         Vector<Vector> AllComponents = new Vector<>();
-        Vector compScore = new Vector();
+        Vector<Double> compScore = new Vector<>();
         int numberofc = 0;
         
         double[] traws=new double[raws.length];
@@ -63,14 +63,14 @@ public final class ComponentFinder {
         
 
         while(!AllNode ){
-            Vector component = new Vector();
+            Vector<Integer> component = new Vector<>();
 
             double componentScore = 0;
             Vector<Neighbor> SearchSpace = new Vector<>();
 //            int startingNode = randomgenerator.nextInt(ppi.size()-1)+1;
             int startingNode = getStartingNode(sorted_raws,nodeColor);
 
-            Vector firstStep   = new Vector();
+            Vector<Integer> firstStep   = new Vector<>();
        
             if(nodeColor[startingNode].equals("white")){
                 nodeColor[startingNode] = "gray";
@@ -122,7 +122,7 @@ public final class ComponentFinder {
 
     private  double[] ComputeScore( Vector v, int newNode, double score){
         double r = raws[newNode];
-        Vector neigh = ppi.get(newNode);
+        Vector<Neighbor> neigh = ppi.get(newNode);
         double penalty=0;
         double[] score_penalty=new double[2];
 
@@ -215,9 +215,9 @@ public final class ComponentFinder {
 
 
 
-    private  Vector findNextCandid(Vector<Neighbor> SearchSpace, Vector component, double ComponentScore, String[] nodeColor ) {
+    private  Vector<Object> findNextCandid(Vector<Neighbor> SearchSpace, Vector component, double ComponentScore, String[] nodeColor ) {
         Neighbor temp = null;
-        Vector V = new Vector();
+        Vector<Object> V = new Vector<>();
         double penalty=0;
         double maxscore = ComponentScore;
 
@@ -234,8 +234,8 @@ public final class ComponentFinder {
         }       
 
         V.add(temp);
-        V.add(maxscore);
-        V.add(penalty);
+        V.add(new Double(maxscore));
+        V.add(new Double(penalty));
         return V;
     }
 
@@ -307,7 +307,7 @@ public final class ComponentFinder {
       for(int j=0;j<v.size()-1;j++){
          int newNode = (Integer)v.elementAt(j);
         double r = raws[newNode];
-        Vector neigh = ppi.get(newNode);
+        Vector<Neighbor> neigh = ppi.get(newNode);
         if(neigh != null){
 //        double penalty=0;
 //        double[] score_penalty=new double[2];
@@ -399,7 +399,7 @@ public final class ComponentFinder {
         while(scan.hasNext()){
             String line = scan.nextLine();
             String[] fields = line.split("\t");
-            Vector subnet = new Vector();
+            Vector<Integer> subnet = new Vector<>();
 //            System.out.println(fields.length);
             for(int i=2;i<fields.length;i++){
                 Integer index = gene_index.get(fields[i]);
@@ -416,11 +416,11 @@ public final class ComponentFinder {
     public void Reproducibility_Overlap(String subnetfilename1, String subnetfilename2,String outf) throws FileNotFoundException, IOException{
         Scanner scan = new Scanner(new File(subnetfilename1));
         Vector<Vector<String>> subnets1 = new Vector<Vector<String>>();
-        Vector subnets1Score = new Vector();
+        Vector<String> subnets1Score = new Vector<>();
         while(scan.hasNext()){
             String line = scan.nextLine();
             String[] fields = line.split("\t");
-            Vector subnet = new Vector();
+            Vector<String> subnet = new Vector<>();
             for(int i=2;i<fields.length;i++){
                 subnet.add(fields[i]);
             }
@@ -429,11 +429,11 @@ public final class ComponentFinder {
         } 
         scan = new Scanner(new File(subnetfilename2));
         Vector<Vector<String>> subnets2 = new Vector<Vector<String>>();
-        Vector subnets2Score = new Vector();
+        Vector<String> subnets2Score = new Vector<>();
         while(scan.hasNext()){
             String line = scan.nextLine();
             String[] fields = line.split("\t");
-            Vector subnet = new Vector();
+            Vector<String> subnet = new Vector<>();
             for(int i=2;i<fields.length;i++){
                 subnet.add(fields[i]);
             }
@@ -448,10 +448,10 @@ public final class ComponentFinder {
             int overlap=0;
             int rank=0;
             int s = 0;
-            Vector subnet = subnets1.elementAt(i);
+            Vector<String> subnet = subnets1.elementAt(i);
             fw.write((i+1)+"\t"+subnet.size()+"\t");
             for(int j=0;j<(subnets2.size());j++){
-                Vector sub = subnets2.elementAt(j);
+                Vector<String> sub = subnets2.elementAt(j);
                 int numover = getOverlap(subnet,sub);
 //                if(i==j)
 //                    fw.write(numover + "\t");
