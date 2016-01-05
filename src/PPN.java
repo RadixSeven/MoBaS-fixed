@@ -22,7 +22,7 @@ import java.util.Vector;
  */
 public class PPN {
     
-    public HashSet<String> ppiNames = new HashSet();
+    public HashSet<String> ppiNames = new HashSet<>();
     public HashMap<String, Integer> gene_index = new HashMap<String, Integer>();
     public HashMap<Integer,String> index_gene = new HashMap<Integer,String>();
     private Scanner scan;
@@ -153,7 +153,7 @@ public class PPN {
     }
     
     public void createPPI(String ppi_filename,double[] raws ,String method) throws FileNotFoundException{
-        ppi = new HashMap();
+        ppi = new HashMap<>();
         scan = new Scanner(new File(ppi_filename));
         while(scan.hasNext()){
             String line = scan.nextLine();
@@ -174,11 +174,11 @@ public class PPN {
 
 
                 Neighbor n = new Neighbor(((gene_index.get(fields[1]))), weight ,gene_index.get(fields[0]),1);
-                Vector neighbors = ppi.get(((gene_index.get(fields[0]))));
+                Vector<Neighbor> neighbors = ppi.get(((gene_index.get(fields[0]))));
 
 
                 if(neighbors == null){
-                    neighbors = new Vector();
+                    neighbors = new Vector<>();
                     neighbors.add(n);
                 }
                 else{
@@ -194,7 +194,7 @@ public class PPN {
     
      
     public void createPermutedPPI(String ppi_filename,double[] raws ,String method) throws FileNotFoundException{
-        ppi = new HashMap();
+        ppi = new HashMap<>();
         scan = new Scanner(new File(ppi_filename));
         while(scan.hasNext()){
             String line = scan.nextLine();
@@ -216,11 +216,11 @@ public class PPN {
 
 
                 Neighbor n = new Neighbor(((Integer.parseInt(fields[1]))), weight ,Integer.parseInt(fields[0]),1);
-                Vector neighbors = ppi.get(((Integer.parseInt(fields[0]))));
+                Vector<Neighbor> neighbors = ppi.get(((Integer.parseInt(fields[0]))));
 
 
                 if(neighbors == null){
-                    neighbors = new Vector();
+                    neighbors = new Vector<>();
                     neighbors.add(n);
                 }
                 else{
