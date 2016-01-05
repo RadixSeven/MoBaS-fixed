@@ -13,3 +13,5 @@ permutedPPI: contains 100 PPI permutation such that the degree of each node pres
 If you have any question, please contact me at marzieh@case.edu
 
 Thanks for using MoBaS. :-)
+
+(Compilation problems with the source were fixed during the 4-6 January 2016 hackathon at the National Center for Biotechnology Information in Bethesda Maryland) 
